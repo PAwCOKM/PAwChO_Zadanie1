@@ -9,12 +9,14 @@ Wykorzystane polecenia:
 `docker scout cves zadanie1:v1 > raport_cve_v1.txt`
 
 
-![Weryfikacja dzialania aplikacji](cve_v1.png)
-
+![Weryfikacja cve_obowiazkowe](cve_v1.png)
 
 
 3. Skanowanie obrazu wieloplatformowego z części dodatkowej:
 `docker scout cves --platform linux/amd64 pawcokm/zadanie1:v3 > raport_cve_v3.txt`
+
+
+![Weryfikacja cve_obowiazkowe](cve_v2.png)
 
 
 Wynik i uzasadnienie:
@@ -30,5 +32,14 @@ Tworzenie i aktywacja buildera:
 `docker buildx inspect --bootstrap`
 
 
+![Bulidx_boostrap1](buildx_boostrap_1.png)
+
+
+![Bulidx_boostrap2](buildx_boostrap_2.png)
+
+
 Budowa i dystrybucja obrazu:
 `docker buildx build --platform linux/amd64,linux/arm64 --secret id=git_token,src=token.txt --cache-to type=registry,ref=pawcokm/zadanie1:cache,mode=max --cache-from type=registry,ref=pawcokm/zadanie1:cache -t pawcokm/zadanie1:v3 --push .`
+
+
+![budowa_dystrybucja](buildx.png)
