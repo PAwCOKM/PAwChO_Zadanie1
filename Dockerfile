@@ -3,6 +3,10 @@ FROM alpine:3.19 AS builder
 
 #do kompilacji i Gita
 RUN apk add --no-cache gcc musl-dev git
+
+#tworzenie uzytkownika bez uprawnien systemowych
+RUN adduser -D -H -u 10001 appuser
+
 WORKDIR /src
 
 #pobranie z repo uzywajac sekretu
@@ -18,7 +22,15 @@ LABEL org.opencontainers.image.title="Zadanie 1 - Wersja Dodatkowa"
 
 ENV TZ="CET-1CEST,M3.5.0,M10.5.0/3"
 
+#kopiowanie plikow identyfikacyjnych uzytkownika
+COPY --from=builder /etc/passwd /etc/passwd
+COPY --from=builder /etc/group /etc/group
+
 COPY --from=builder /src/server /server
+
+#zmiana kontekstu na uzytkownika nieuprzywilejowanego
+USER appuser
+
 EXPOSE 8080
 
 HEALTHCHECK --interval=10s --timeout=3s --retries=3 \
