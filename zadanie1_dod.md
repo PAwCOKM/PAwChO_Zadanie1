@@ -7,7 +7,13 @@ Zgodnie z wymaganiami, opracowane obrazy kontenerów zostały poddane analizie p
 Wykorzystane polecenia:
 1. Skanowanie obrazu z części obowiązkowej:
 `docker scout cves zadanie1:v1 > raport_cve_v1.txt`
-2. Skanowanie obrazu wieloplatformowego z części dodatkowej:
+
+
+![Weryfikacja dzialania aplikacji](Zrzut ekranu 2026-05-12 215919.png)
+
+
+
+3. Skanowanie obrazu wieloplatformowego z części dodatkowej:
 `docker scout cves --platform linux/amd64 pawcokm/zadanie1:v3 > raport_cve_v3.txt`
 
 
