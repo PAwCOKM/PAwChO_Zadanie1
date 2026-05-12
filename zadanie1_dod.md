@@ -9,7 +9,7 @@ Wykorzystane polecenia:
 `docker scout cves zadanie1:v1 > raport_cve_v1.txt`
 
 
-![Weryfikacja dzialania aplikacji](cve_1.png)
+![Weryfikacja dzialania aplikacji](cve_v1.png)
 
 
 
