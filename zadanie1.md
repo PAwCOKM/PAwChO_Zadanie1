@@ -1,7 +1,8 @@
-Zadanie 1 - Programowanie Aplikacji w Chmurze Obliczeniowej
-1. Kod aplikacji (server.c)
-Aplikacja zaimplementowana w języku C jako serwer HTTP. Realizuje logowanie danych przy starcie (data, autor, port TCP) oraz udostępnia interfejs do sprawdzania pogody.
+#Zadanie 1 - Programowanie Aplikacji w Chmurze Obliczeniowej
 
+##1. Kod aplikacji (server.c) zaimplementowanej w języku C jako serwer HTTP. Realizuje logowanie danych przy starcie oraz udostępnia interfejs do sprawdzania pogody.
+
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -32,7 +33,7 @@ const char *html =
 "<script>"
 "function getWeather() {"
 "  var loc = document.getElementById('loc').value.split(',');"
-"  fetch('https://api.open-meteo.com/v1/forecast?latitude='+loc[0]+'&longitude='+loc[1]+'&current_weather=true')"
+"  fetch('[https://api.open-meteo.com/v1/forecast?latitude='+loc](https://api.open-meteo.com/v1/forecast?latitude='+loc)[0]+'&longitude='+loc[1]+'&current_weather=true')"
 "  .then(r=>r.json()).then(d=>{"
 "    document.getElementById('res').innerHTML = 'Aktualna temperatura: ' + d.current_weather.temperature + ' °C';"
 "  });"
@@ -100,10 +101,10 @@ int main(int argc, char const *argv[]) {
     }
     return 0;
 }
+```
+##2. Plik Dockerfile wykorzystuje wieloetapowe budowanie oraz obraz bazowy scratch w celu minimalizacji rozmiaru. Zawiera etykiety OCI oraz mechanizm HEALTHCHECK.
 
-
-2. Plik Dockerfile wykorzystuje wieloetapowe budowanie oraz obraz bazowy scratch w celu minimalizacji rozmiaru. Zawiera etykiety OCI oraz mechanizm HEALTHCHECK.
-
+```Dockerfile
 #wieloetapowe budowanie obrazu
 FROM alpine:3.19 AS builder
 
@@ -142,21 +143,18 @@ HEALTHCHECK --interval=10s --timeout=3s --retries=3 \
 
 #punkt wejscia dla kontenera
 CMD ["/server"]
-
-3. Polecenia weryfikacyjne
-Zbudowanie obrazu kontenera:
+```
+##3. Polecenia weryfikacyjne
+###Zbudowanie obrazu kontenera:
 docker build -t zadanie1:v1 .
-
-Uruchomienie kontenera:
+###Uruchomienie kontenera:
 docker run -d -p 8080:8080 --name pogoda_app zadanie1:v1
-
-Uzyskanie informacji z logów:
+###Uzyskanie informacji z logów:
 docker logs pogoda_app
-
-Sprawdzenie liczby warstw oraz rozmiaru obrazu:
+###Sprawdzenie liczby warstw oraz rozmiaru obrazu:
 docker history zadanie1:v1
 docker images zadanie1:v1
 
-4. Weryfikacja działania
-Adres: http://localhost:8080
+##4. Weryfikacja działania
+Adres: http://localhost:8080 
 ![Weryfikacja dzialania aplikacji](Zrzut_ekranu_2026-05-12.png)
