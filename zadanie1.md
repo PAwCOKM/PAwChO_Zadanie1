@@ -145,16 +145,16 @@ HEALTHCHECK --interval=10s --timeout=3s --retries=3 \
 CMD ["/server"]
 ```
 3. Polecenia weryfikacyjne
-Zbudowanie obrazu kontenera:
+a. Zbudowanie obrazu kontenera:
 docker build -t zadanie1:v1 .
-Uruchomienie kontenera:
+b. Uruchomienie kontenera:
 docker run -d -p 8080:8080 --name pogoda_app zadanie1:v1
-Uzyskanie informacji z logów:
+c. Uzyskanie informacji z logów:
 docker logs pogoda_app
-Sprawdzenie liczby warstw oraz rozmiaru obrazu:
+d. Sprawdzenie liczby warstw oraz rozmiaru obrazu:
 docker history zadanie1:v1
 docker images zadanie1:v1
 
-##4. Weryfikacja działania
+4. Weryfikacja działania
 Adres: http://localhost:8080 
 ![Weryfikacja dzialania aplikacji](Zrzut_ekranu_2026-05-12.png)
